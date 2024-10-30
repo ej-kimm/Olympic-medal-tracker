@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddMedal from './components/AddMedal'
 import MedalList from './components/MedalList'
 import styles from './App.module.css'
 
 export default function App() {
-  const [medals, setMedals] = useState([])
+  const [medals, setMedals] = useState(() => readMedalsFromLocalStorage())
+
+  useEffect(() => {
+    localStorage.setItem('medals', JSON.stringify(medals))
+  }, [medals])
 
   return (
     <section className={styles.container}>
@@ -13,4 +17,9 @@ export default function App() {
       <MedalList medals={medals} setMedals={setMedals} />
     </section>
   )
+}
+
+function readMedalsFromLocalStorage() {
+  const medals = localStorage.getItem('medals')
+  return medals ? JSON.parse(medals) : []
 }
