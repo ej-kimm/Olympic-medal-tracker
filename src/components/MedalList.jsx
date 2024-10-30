@@ -1,7 +1,13 @@
 import React from 'react'
-import { AddOrUpdateButton } from './ui/Button'
+import Button from './ui/Button'
 
-export default function MedalList({ medals }) {
+export default function MedalList({ medals, setMedals }) {
+  const sortedMedals = [...medals].sort((a, b) => b.gold - a.gold)
+
+  const handleDelete = (country) => {
+    setMedals(medals.filter((medal) => medal.country !== country))
+  }
+
   return (
     <table>
       <thead>
@@ -14,14 +20,16 @@ export default function MedalList({ medals }) {
         </tr>
       </thead>
       <tbody>
-        {medals.map((medal) => (
+        {sortedMedals.map((medal) => (
           <tr key={medal.country}>
             <td>{medal.country}</td>
             <td>{medal.gold}</td>
             <td>{medal.silver}</td>
             <td>{medal.bronze}</td>
             <td>
-              <AddOrUpdateButton>삭제</AddOrUpdateButton>
+              <Button id="remove" onClick={() => handleDelete(medal.country)}>
+                삭제
+              </Button>
             </td>
           </tr>
         ))}

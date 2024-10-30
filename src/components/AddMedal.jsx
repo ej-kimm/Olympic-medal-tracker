@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import MedalFormInput from './MedalFormInput'
-import { AddOrUpdateButton } from './ui/Button'
+import Button from './ui/Button'
 
-export default function AddMedal({ setMedals }) {
+export default function AddMedal({ medals, setMedals }) {
   const [currentMedal, setCurrentMedal] = useState({
     country: '',
     gold: 0,
@@ -13,13 +13,12 @@ export default function AddMedal({ setMedals }) {
   const handleInputChange = (e) => {
     const { id, value } = e.target
     if (id === 'country' || (Number(value) >= 0 && Number(value) <= 99)) {
-      setCurrentMedal((prev) => ({
-        ...prev,
+      setCurrentMedal({
+        ...currentMedal,
         [id]: id === 'country' ? value : Number(value),
-      }))
+      })
     }
   }
-
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -27,7 +26,24 @@ export default function AddMedal({ setMedals }) {
       alert('국가명을 입력해주세요!')
       return
     }
-    setMedals((prev) => [...prev, currentMedal])
+    if (medals.some((medal) => medal.country === currentMedal.country)) {
+      alert('이미 존재하는 국가입니다')
+      return
+    }
+
+    setMedals([...medals, currentMedal])
+    setCurrentMedal({ country: '', gold: 0, silver: 0, bronze: 0 })
+  }
+  const handleUpdate = () => {
+    if (!currentMedal.country) {
+      alert('국가명을 입력해주세요!')
+      return
+    }
+    setMedals(
+      medals.map((medal) =>
+        medal.country === currentMedal.country ? currentMedal : medal
+      )
+    )
     setCurrentMedal({ country: '', gold: 0, silver: 0, bronze: 0 })
   }
 
@@ -63,8 +79,10 @@ export default function AddMedal({ setMedals }) {
         onChange={handleInputChange}
       />
 
-      <AddOrUpdateButton>국가 추가</AddOrUpdateButton>
-      <AddOrUpdateButton>업데이트</AddOrUpdateButton>
+      <Button id="add">국가 추가</Button>
+      <Button id="update" onClick={handleUpdate}>
+        업데이트
+      </Button>
     </form>
   )
 }

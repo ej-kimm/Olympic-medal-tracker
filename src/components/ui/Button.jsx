@@ -1,5 +1,16 @@
 import React from 'react'
 
-export const AddOrUpdateButton = ({ children }) => {
-  return <button type="submit">{children}</button>
+const Button = ({ children, id, onClick }) => {
+  return (
+    <>
+      {id === 'add' && <button type="submit">{children}</button>}
+      {id !== 'add' && (
+        <button type="button" onClick={onClick}>
+          {children}
+        </button>
+      )}
+    </>
+  )
 }
+
+export default Button

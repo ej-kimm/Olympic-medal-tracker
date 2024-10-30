@@ -8,8 +8,8 @@ export default function App() {
   return (
     <>
       <h1>2024 파리 올림픽</h1>
-      <AddMedal setMedals={setMedals} />
-      <MedalList medals={medals} />
+      <AddMedal medals={medals} setMedals={setMedals} />
+      <MedalList medals={medals} setMedals={setMedals} />
     </>
   )
 }
