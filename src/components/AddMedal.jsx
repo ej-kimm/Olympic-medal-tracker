@@ -23,6 +23,10 @@ export default function AddMedal({ setMedals }) {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    if (!currentMedal.country) {
+      alert('국가명을 입력해주세요!')
+      return
+    }
     setMedals((prev) => [...prev, currentMedal])
     setCurrentMedal({ country: '', gold: 0, silver: 0, bronze: 0 })
   }
