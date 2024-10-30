@@ -1,0 +1,15 @@
+.formGroup {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-shrink: 0;
+  gap: 10px;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import MedalFormInput from './MedalFormInput'
 import Button from './ui/Button'
+import styles from '../styles/AddMedal.module.css'
 
 export default function AddMedal({ medals, setMedals }) {
   const [currentMedal, setCurrentMedal] = useState({
@@ -48,7 +49,7 @@ export default function AddMedal({ medals, setMedals }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.formGroup} onSubmit={handleSubmit}>
       <MedalFormInput
         id="country"
         label="국가명"
@@ -79,10 +80,12 @@ export default function AddMedal({ medals, setMedals }) {
         onChange={handleInputChange}
       />
 
-      <Button id="add">국가 추가</Button>
-      <Button id="update" onClick={handleUpdate}>
-        업데이트
-      </Button>
+      <div className={styles.buttonGroup}>
+        <Button id="add">국가 추가</Button>
+        <Button id="update" onClick={handleUpdate}>
+          업데이트
+        </Button>
+      </div>
     </form>
   )
 }

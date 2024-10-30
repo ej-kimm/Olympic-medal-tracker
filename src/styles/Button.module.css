@@ -1,0 +1,23 @@
+.commonButton,
+.removeButton {
+  border-radius: 5px;
+  transition: background-color 200ms ease-in-out;
+}
+
+.commonButton {
+  padding: 12px;
+  background-color: #7ab2d3;
+}
+
+.commonButton:hover {
+  background-color: #74a7c5;
+}
+
+.removeButton {
+  padding: 5px 10px;
+  background-color: #e98b87;
+}
+
+.removeButton:hover {
+  background-color: #d67976;
+}
