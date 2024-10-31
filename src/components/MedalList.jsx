@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Button from './ui/Button'
 import styles from '../styles/MedalList.module.css'
 import SortButton from './SortButton'
 
 export default function MedalList({ medals, setMedals }) {
   const [sortType, setSortType] = useState('gold')
-  const [sortedMedals, setSortedMedals] = useState([])
+  const sortedMedals = [...medals].sort((a, b) => b[sortType] - a[sortType])
 
   const handleDelete = (country) => {
     setMedals(medals.filter((medal) => medal.country !== country))
   }
-
-  useEffect(() => {
-    setSortedMedals([...medals].sort((a, b) => b[sortType] - a[sortType]))
-  }, [medals, sortType])
 
   return (
     <>
