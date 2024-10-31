@@ -5,7 +5,18 @@ import SortButton from './SortButton'
 
 export default function MedalList({ medals, setMedals }) {
   const [sortType, setSortType] = useState('gold')
-  const sortedMedals = [...medals].sort((a, b) => b[sortType] - a[sortType])
+  const sortedMedals = [...medals].sort((a, b) => {
+    if (b[sortType] !== a[sortType]) {
+      return b[sortType] - a[sortType]
+    }
+    if (b.gold !== a.gold) {
+      return b.gold - a.gold
+    }
+    if (b.silver !== a.silver) {
+      return b.silver - a.silver
+    }
+    return b.bronze - a.bronze
+  })
 
   const handleDelete = (country) => {
     setMedals(medals.filter((medal) => medal.country !== country))
