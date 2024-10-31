@@ -21,6 +21,10 @@ th {
   color: #fff;
 }
 
+table th button {
+  color: #fff;
+}
+
 tr:nth-child(2n) {
   background-color: #f8f8f6;
 }
